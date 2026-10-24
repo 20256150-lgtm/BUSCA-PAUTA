@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pautas SC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: poster grid. Red field, black heavy type, cream/halftone tiles cut by thin red lines; reading happens on cream panels. */
+:root{
+  --red:#EE3B2C;
+  --ink:#120F0D;
+  --paper:#F6F1E7;
+  --paper-2:#EAE3D4;
+  --mute:#5B5249;
+  --display:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--red);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;font-stretch:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.nav :focus-visible{outline-color:var(--red)}
+.wrap{max-width:1240px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--paper)}
+.nav .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 24px;padding-block:10px}
+.nav b{font-family:var(--display);font-weight:900;font-stretch:125%;letter-spacing:.02em;text-transform:uppercase;font-size:15px}
+.nav ul{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0}
+.nav a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover{border-bottom-color:var(--red)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(78px,14.2vw,176px);gap:3px;margin-top:clamp(20px,3vw,40px)}
+.word{margin:0;display:flex;align-items:center;font-family:var(--display);font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(3.4rem,13.4vw,10.6rem);line-height:.8;letter-spacing:-.045em;position:relative;z-index:2;white-space:nowrap}
+.w1{grid-column:1/4;grid-row:1}
+.w2{grid-column:1/3;grid-row:2}
+.w3{grid-column:1/4;grid-row:3}
+.tile{min-width:0}
+.cream{background:var(--paper)}
+.black{background:var(--ink)}
+.half{background:radial-gradient(var(--ink) 1.1px,transparent 1.7px) 0 0/6px 6px,var(--paper)}
+.half-d{background:radial-gradient(var(--paper) 1px,transparent 1.6px) 0 0/6px 6px,var(--ink)}
+.bands{background:repeating-linear-gradient(0deg,var(--ink) 0 14%,var(--paper) 14% 28%)}
+.t1{grid-column:4;grid-row:1}.t2{grid-column:5;grid-row:1}.t3{grid-column:6;grid-row:1}
+.t4{grid-column:3;grid-row:2}.t5{grid-column:4;grid-row:2}.t6{grid-column:5/7;grid-row:2}
+.t7{grid-column:4;grid-row:3}.t8{grid-column:5;grid-row:3}.t9{grid-column:6;grid-row:3}
+.credit{display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-top:14px}
+.credit span{min-width:0}
+
+.billing{display:flex;align-items:center;gap:16px;margin:clamp(28px,4vw,52px) 0 28px}
+.billing i{flex:1;height:2px;background:var(--ink);min-width:12px}
+.billing svg{flex:none;width:22px;height:22px;fill:var(--ink)}
+.billing p{margin:0;font-family:var(--display);font-weight:800;font-stretch:125%;letter-spacing:.5em;text-transform:uppercase;font-size:clamp(.78rem,2.3vw,1.35rem);text-align:center;padding-left:.5em}
+
+/* index (tracklist) */
+.idx-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:4px;font-weight:800;font-size:1.05rem}
+.idx-head span:last-child{text-align:right;line-height:1.1;font-weight:800}
+.idx{list-style:none;margin:14px 0 0;padding:0;columns:2;column-gap:56px}
+.idx li{break-inside:avoid}
+.idx a{display:flex;align-items:baseline;gap:10px;text-decoration:none;padding:5px 0;font-size:1rem;font-weight:600}
+.idx a:hover .t{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.idx .n{font-family:var(--mono);font-size:.85rem;font-weight:600}
+.idx .d{flex:1;min-width:12px;border-bottom:1.5px solid var(--ink);transform:translateY(-4px)}
+.idx .g{font-family:var(--mono);font-size:.85rem;font-weight:500;white-space:nowrap}
+
+/* generic blocks */
+section{scroll-margin-top:64px}
+.panel{background:var(--paper);color:var(--ink);padding:clamp(20px,4vw,48px);margin-top:3px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin:0 0 10px}
+h2{font-family:var(--display);font-weight:900;font-stretch:112%;text-transform:uppercase;letter-spacing:-.03em;line-height:.92;font-size:clamp(2.2rem,7vw,5rem);margin:0;text-wrap:balance}
+.lead{max-width:62ch;font-size:1.12rem}
+.lead p{margin:0 0 1em}
+.band{margin-top:clamp(44px,6vw,84px)}
+.band h2{padding-bottom:18px}
+
+/* pautas */
+.ph{display:grid;grid-template-columns:auto 1fr;gap:6px clamp(14px,3vw,36px);align-items:end;padding-top:clamp(40px,6vw,76px)}
+.pn{font-family:var(--display);font-weight:900;font-stretch:125%;font-size:clamp(4rem,13vw,10rem);line-height:.78;letter-spacing:-.05em}
+.ph h3{margin:0;font-family:var(--display);font-weight:900;font-stretch:112%;text-transform:uppercase;letter-spacing:-.025em;line-height:.95;font-size:clamp(1.55rem,4.2vw,3rem);text-wrap:balance}
+.ph .tag{grid-column:1/-1;margin:10px 0 0;border-top:2px solid var(--ink);padding-top:8px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.pb{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,56px)}
+.pb h4{margin:0 0 8px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.pb p{margin:0 0 1em;max-width:62ch}
+.pb ul{margin:0 0 1.4em;padding-left:1.1em;max-width:62ch}
+.pb li{margin-bottom:.45em}
+.col>section,.col>div{margin-bottom:1.6em}
+.ref{font-family:var(--mono);font-size:.74em;font-weight:600;text-decoration:none;background:var(--ink);color:var(--paper);padding:1px 5px;margin-left:2px;white-space:nowrap;vertical-align:.12em}
+.ref:hover{background:var(--red);color:var(--ink)}
+.post{background:var(--paper-2);border:2px solid var(--ink);padding:18px 18px 6px;margin-bottom:16px}
+.post .fmt{margin:0 0 6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.post h5{margin:0 0 10px;font-family:var(--display);font-weight:800;font-stretch:110%;font-size:1.3rem;line-height:1.05;letter-spacing:-.01em;text-wrap:balance}
+.post dl{margin:0}
+.post dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border-top:1px solid var(--ink);padding-top:6px;margin-top:6px}
+.post dd{margin:2px 0 12px;font-size:.98rem;line-height:1.5}
+
+/* method + sources */
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,48px)}
+.cols2 h3{font-family:var(--display);font-weight:800;font-stretch:112%;text-transform:uppercase;font-size:1.3rem;letter-spacing:-.01em;margin:0 0 10px}
+.cols2 ul,.cols2 ol{margin:0;padding-left:1.15em}
+.cols2 li{margin-bottom:.55em}
+.src{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.src li{display:grid;grid-template-columns:3.2rem minmax(0,1fr);gap:4px 12px;padding:12px 0;border-top:1.5px solid var(--ink);scroll-margin-top:72px}
+.src li:last-child{border-bottom:1.5px solid var(--ink)}
+.src li:target{background:var(--paper-2)}
+.src .k{font-family:var(--mono);font-weight:600;font-size:.9rem;padding-top:2px}
+.src a{font-weight:700;overflow-wrap:anywhere}
+.src .u{display:block;font-family:var(--mono);font-size:12.5px;color:var(--mute);overflow-wrap:anywhere;margin-top:2px}
+.src .c{display:block;font-size:.95rem;margin-top:4px}
+.src .c b{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+.notice{border:2px solid var(--ink);padding:16px 18px;margin-top:22px;background:var(--paper-2)}
+.notice p{margin:0}
+
+footer{margin-top:clamp(48px,7vw,96px);padding-bottom:clamp(28px,4vw,48px)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px 32px;border-top:2px solid var(--ink);padding-top:14px}
+.foot p{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.05em;max-width:62ch;font-weight:500}
+.barcode{width:120px;height:34px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 13px)}
+
+@media (max-width:900px){
+  .pb{grid-template-columns:minmax(0,1fr)}
+  .idx{columns:1}
+  .cols2{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .hero{grid-template-columns:repeat(4,1fr);grid-auto-rows:auto}
+  .word{grid-column:1/-1 !important;grid-row:auto !important;font-size:clamp(3.6rem,24vw,8rem);order:0;padding:2px 0}
+  .tile{aspect-ratio:1;order:1;grid-column:auto !important;grid-row:auto !important}
+  .t9,.t8{display:none}
+  .t6{grid-column:auto !important}
+  .ph{grid-template-columns:minmax(0,1fr)}
+  .pn{font-size:5.4rem}
+  .billing p{letter-spacing:.28em}
+  .nav ul{gap:2px 14px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navegação principal">
+  <div class="wrap">
+    <b>Pautas SC</b>
+    <ul>
+      <li><a href="#resumo">Resumo</a></li>
+      <li><a href="#pautas">Pautas</a></li>
+      <li><a href="#limites">Limites</a></li>
+      <li><a href="#fontes">Fontes</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="wrap">
+  <div class="hero">
+    <h1 class="word w1">Pautas</h1>
+    <div class="tile cream t1"></div>
+    <div class="tile half t2"></div>
+    <div class="tile cream t3"></div>
+
+    <p class="word w2" aria-hidden="true">em</p>
+    <div class="tile half t4"></div>
+    <div class="tile cream t5"></div>
+    <div class="tile bands t6"></div>
+
+    <p class="word w3" aria-hidden="true">SC</p>
+    <div class="tile half-d t7"></div>
+    <div class="tile cream t8"></div>
+    <div class="tile half t9"></div>
+  </div>
+  <div class="credit">
+    <span>Radar sociocultural catarinense</span>
+    <span>Para artistas, coletivos, músicos e público</span>
+  </div>
+
+  <div class="billing" role="presentation">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.7 6.6 4.8 10.7 12 12-7.2 1.3-11.3 5.4-12 12-.7-6.6-4.8-10.7-12-12C7.200 10.700 11.300 6.600 12 0z"/></svg>
+    <i></i>
+    <p>Santa Catarina</p>
+    <i></i>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.7 6.6 4.8 10.7 12 12-7.2 1.3-11.3 5.4-12 12-.7-6.6-4.8-10.7-12-12C7.200 10.700 11.300 6.600 12 0z"/></svg>
+  </div>
+
+  <div class="idx-head"><span>Índice de pautas</span><span>17.10<br>2026</span></div>
+  <ol class="idx">
+    <li><a href="#p1"><span class="n">01</span><span class="t">Quem recebe o dinheiro público</span><span class="d"></span><span class="g">Financiamento</span></a></li>
+    <li><a href="#p2"><span class="n">02</span><span class="t">Autoral no palco</span><span class="d"></span><span class="g">Música</span></a></li>
+    <li><a href="#p3"><span class="n">03</span><span class="t">Retomada e arte indígena</span><span class="d"></span><span class="g">Território</span></a></li>
+    <li><a href="#p4"><span class="n">04</span><span class="t">Palavra na praça</span><span class="d"></span><span class="g">Slam</span></a></li>
+    <li><a href="#p5"><span class="n">05</span><span class="t">Ocupar a rua</span><span class="d"></span><span class="g">Fanfarra e escola</span></a></li>
+    <li><a href="#p6"><span class="n">06</span><span class="t">Quem expõe</span><span class="d"></span><span class="g">Artes visuais</span></a></li>
+    <li><a href="#limites"><span class="n">07</span><span class="t">Limites e como completar</span><span class="d"></span><span class="g">Método</span></a></li>
+    <li><a href="#fontes"><span class="n">08</span><span class="t">Fontes para checagem</span><span class="d"></span><span class="g">23 links</span></a></li>
+  </ol>
+</header>
+
+<main class="wrap">
+
+<section id="resumo" class="band">
+  <h2>Resumo da pauta</h2>
+  <div class="panel">
+    <p class="kicker">Tema central</p>
+    <div class="lead">
+      <p><strong>Quem financia, quem ocupa e quem conta a cultura em Santa Catarina em 2026.</strong> As fontes públicas mostram três movimentos ao mesmo tempo.</p>
+      <p>O primeiro é o dinheiro público: o Circuito Catarinense de Cultura, pago com recursos da PNAB, prometeu vagas por região e cotas para pessoas negras, indígenas e com deficiência. O segundo é uma cena de música autoral jovem, concentrada em poucas cidades e em poucas casas. O terceiro são as vozes de território, como povos indígenas, poetas de slam, mulheres e pessoas trans, que usam a retomada de terra, a praça e a rua como palco.</p>
+      <p>A hipótese de investigação é que a promessa de descentralização e inclusão ainda não se vê por inteiro nos dados nem nas falas de quem produz. Isso precisa ser testado com os documentos e com entrevistas. Cada pauta abaixo traz dados já localizados, um ângulo de apuração e conteúdos para redes sociais, com execução e montagem.</p>
+    </div>
+  </div>
+</section>
+
+<div id="pautas"></div>
+
+<!-- PAUTA 01 -->
+<section id="p1" class="band">
+  <div class="ph">
+    <span class="pn">01</span>
+    <h3>Quem recebe o dinheiro público da cultura</h3>
+    <p class="tag"><span>Financiamento</span><span>Circuito Catarinense · PNAB</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>O Circuito Catarinense de Cultura 2026 soma R$ 27,52 milhões para 507 propostas em quatro modalidades<a class="ref" href="#s1">[1]</a>. O edital promete vagas distribuídas por região, cotas para pessoas negras, indígenas e com deficiência e acessibilidade obrigatória em todas as propostas<a class="ref" href="#s2">[2]</a>. A lista de classificados é pública e inclui, por exemplo, propostas de slam e de cultura negra<a class="ref" href="#s3">[3]</a>. A pauta testa a promessa: o recurso chegou aos territórios que o edital cita?</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>Modalidades: Festivais e Mostras; Evento Cultural ou Apresentação; Qualificação e Formação; Ações artísticas culturais<a class="ref" href="#s1">[1]</a>.</li>
+          <li>As propostas podem ser executadas até 31/07/2027, data também do relatório final<a class="ref" href="#s1">[1]</a>.</li>
+          <li>Festivais e Mostras exigem ao menos 12 horas, seis apresentações e gratuidade<a class="ref" href="#s4">[4]</a>.</li>
+          <li>O projeto Entre Artes, do Arte que Mora Aqui, também usa recursos da PNAB e abriu chamada para fazedores de cultura de municípios como Tijucas, Canelinha, São João Batista e Nova Trento<a class="ref" href="#s5">[5]</a>.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Tabular o PDF de resultado por município, classe e modalidade e comparar com a divisão regional prometida.</li>
+          <li>Pedir à Fundação Catarinense de Cultura os dados de cotas efetivamente preenchidas.</li>
+          <li>Ouvir proponentes classificados e quem ficou de fora.</li>
+          <li>Acompanhar prazos de pagamento e prestação de contas até 2027.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Carrossel · Instagram · 8 lâminas</p>
+        <h5>Para onde foi o dinheiro</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Transformar o PDF de resultado em planilha. Contar propostas por município e por modalidade, e conferir cada número duas vezes antes de publicar.</dd>
+          <dt>Montagem</dt>
+          <dd>Lâmina 1 com a pergunta em letras grandes. Lâminas 2 a 6 com um gráfico de barras simples cada. Lâmina 7 explica o método. Lâmina 8 traz o link do edital e do resultado.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Vídeo vertical · Reels · 45 s</p>
+        <h5>Como foi passar pelo edital</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Gravar três proponentes com as mesmas perguntas: quanto pediu, quanto tempo levou a documentação, o que mudaria no edital. Cada resposta com no máximo 12 segundos.</dd>
+          <dt>Montagem</dt>
+          <dd>Legenda grande na tela, corte seco entre as falas e trilha de um artista contemplado, com autorização. Fechar com um número do levantamento.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PAUTA 02 -->
+<section id="p2" class="band">
+  <div class="ph">
+    <span class="pn">02</span>
+    <h3>Autoral no palco: a cena e as casas que a recebem</h3>
+    <p class="tag"><span>Música</span><span>Florianópolis · Blumenau · Joinville</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>Um mapeamento de 2026 reúne ao menos 115 bandas e artistas autorais de SC e 13 casas de shows, concentradas em Florianópolis e Blumenau<a class="ref" href="#s6">[6]</a>. A lista considera grupos com até cinco anos de atividade<a class="ref" href="#s7">[7]</a>. Em paralelo, um levantamento da Abrasel coloca Florianópolis como a capital com mais bares com entretenimento por habitante<a class="ref" href="#s8">[8]</a>. A pauta pergunta onde está a diferença entre ter muitos palcos e ter palco para quem faz música própria.</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>115 bandas e artistas autorais e 13 casas de shows no mapa<a class="ref" href="#s6">[6]</a>.</li>
+          <li>Abrasel: 77 bares com entretenimento por 100 mil habitantes em Florianópolis. A mesma matéria mostra 81,2 numa linha do ranking, então é preciso conferir qual número vale<a class="ref" href="#s8">[8]</a>.</li>
+          <li>O Rifferama lista 115 álbuns lançados em 2026 por artistas catarinenses<a class="ref" href="#s9">[9]</a>. O número coincide com o do mapa, mas são contagens diferentes.</li>
+          <li>Em Blumenau, o Escadinha Musical grava sessões ao vivo de bandas autorais com recursos da Lei Paulo Gustavo<a class="ref" href="#s10">[10]</a>.</li>
+          <li>Coletivos de música eletrônica como a Brume, de Balneário Camboriú, e o Beco 54, coletivo LGBTQIA+, promovem artistas locais<a class="ref" href="#s11">[11]</a>. A matéria é de 2024.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Entrevistar donos de casa e artistas sobre cachê, couvert artístico e bilheteria.</li>
+          <li>Separar, nos dados da Abrasel, bares com música ao vivo de casas que programam repertório autoral. As duas contagens não são comparáveis diretamente.</li>
+          <li>Ler as avaliações públicas das casas no Google Maps seguindo o roteiro da seção Limites.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Série de Stories · 6 telas</p>
+        <h5>Onde tocar autoral em SC</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Pedir autorização a quem mantém o mapa para citar a lista. Escolher cinco casas, confirmar endereço e dia de programação autoral com cada uma e registrar uma foto do palco.</dd>
+          <dt>Montagem</dt>
+          <dd>Uma tela por cidade, com foto do palco, nome da casa e enquete de adesivo: &ldquo;já tocou aqui?&rdquo;. Última tela com o link do mapa e convite para o público indicar casas que faltam.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Vídeo vertical · Reels · 60 s</p>
+        <h5>Quanto vale o palco</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Perguntar a cinco músicos quanto receberam no último show autoral e quanto gastaram para tocar. Oferecer anonimato nos valores a quem preferir.</dd>
+          <dt>Montagem</dt>
+          <dd>Valores aparecem como texto na tela sobre imagens de passagem de som e equipamento sendo carregado. O fecho compara os valores ditos, sem julgamento, e convida o público a comentar o que paga por um ingresso.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PAUTA 03 -->
+<section id="p3" class="band">
+  <div class="ph">
+    <span class="pn">03</span>
+    <h3>Retomada, território e arte indígena</h3>
+    <p class="tag"><span>Território</span><span>Guarani · Kaingang · Laklãnõ-Xokleng</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>Povos Xokleng e Kaingang fizeram em setembro de 2025 uma mostra cultural na retomada dentro da Floresta Nacional de Três Barras, com mais de três anos de permanência no território<a class="ref" href="#s12">[12]</a>. Em 2026, a exposição Yvyrupá Território apresentou retratos de povos Guarani, Kaingang e Xokleng no formato 3x4 das fichas oficiais<a class="ref" href="#s13">[13]</a>. A UFSC montou uma mostra com onze curadores indígenas sobre os territórios dos três povos<a class="ref" href="#s14">[14]</a>. A pauta junta arte, terra e direito, com as comunidades como autoras.</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>Mostra Cultural Xokleng e Kaingang, 26 e 27/09/2025, na retomada Jug Óg Pãntxi e Gág Mūr, em Três Barras<a class="ref" href="#s12">[12]</a>.</li>
+          <li>Yvyrupá Território, do artista Radilson Gomes, de 26/03 a 14/05/2026. A mostra ocorreu na Câmara dos Deputados, em Brasília, e retrata povos de SC<a class="ref" href="#s13">[13]</a>.</li>
+          <li>Terras e Águas, na UFSC, tem 11 curadores indígenas e inclui o manto Kul Tõ Vã Ze, feito por mulheres com fibra de urtiga<a class="ref" href="#s14">[14]</a>.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Pedir autorização às comunidades e às organizações antes de gravar, e combinar quem fala, como os nomes aparecem e o que não deve ser filmado.</li>
+          <li>Ouvir artistas indígenas sobre circulação das obras, renda e acesso a editais.</li>
+          <li>Conferir a situação atual do território em fonte oficial ou jurídica, sem depender de relato único.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Série em vídeo · YouTube e Reels · 3 episódios</p>
+        <h5>Território em primeira pessoa</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Um episódio por povo, com roteiro aprovado pela comunidade. Gravar na aldeia ou na retomada, com quem a comunidade indicar. Legendar no idioma original quando houver fala e em português.</dd>
+          <dt>Montagem</dt>
+          <dd>Sem trilha externa sobre as falas. Planos longos de mãos, matéria-prima e paisagem, com o nome e o povo de cada pessoa na tela. Créditos finais com a organização responsável.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Carrossel · Instagram · 7 lâminas</p>
+        <h5>Do 3x4 ao território</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Explicar, com texto próprio e fotos oficiais de divulgação autorizadas pelo artista, como a mostra Yvyrupá usa o formato da ficha de identificação para falar de território.</dd>
+          <dt>Montagem</dt>
+          <dd>Lâmina 1 com a pergunta &ldquo;quem aparece em documento oficial?&rdquo;. Lâminas centrais com um retrato por lâmina e a frase do artista, com a fonte. Última lâmina com serviço e link.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PAUTA 04 -->
+<section id="p4" class="band">
+  <div class="ph">
+    <span class="pn">04</span>
+    <h3>Palavra na praça: quem fala no slam</h3>
+    <p class="tag"><span>Poesia falada</span><span>São José · Florianópolis · Joinville</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>O primeiro slam de SC, o Slam Continente, nasceu em 2017 numa praça de São José<a class="ref" href="#s15">[15]</a>. Hoje há oficinas em escolas municipais de Florianópolis<a class="ref" href="#s16">[16]</a>, coletivos de mulheres e pessoas trans como o Slam das Gurias<a class="ref" href="#s17">[17]</a> e programação do Sesc em oito cidades<a class="ref" href="#s18">[18]</a>. Em Joinville, o Festival Literário de SC incluiu debates sobre educação antirracista<a class="ref" href="#s19">[19]</a>. A pauta acompanha como a poesia falada vira política cultural.</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>Slam Continente, na praça Eugênio Raulino Koerich desde junho de 2017<a class="ref" href="#s15">[15]</a>.</li>
+          <li>Slam Educa: oficina em três etapas, com escrita, disputa na escola e disputa fora dela, na UFSC<a class="ref" href="#s16">[16]</a>.</li>
+          <li>Slam das Gurias dá foco a mulheres e pessoas trans<a class="ref" href="#s17">[17]</a>.</li>
+          <li>ViaPoesia 2026, de 25/07 a 15/08, em oito cidades, com lançamentos de livros como &ldquo;Retintas&rdquo; e o do coletivo Slam Educa<a class="ref" href="#s18">[18]</a>.</li>
+          <li>Slam SC e Slam Xodó aparecem entre as propostas classificadas no Circuito Catarinense<a class="ref" href="#s3">[3]</a>.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Acompanhar uma batalha de ponta a ponta e entrevistar organizadores sobre financiamento, estrutura e segurança em praça pública.</li>
+          <li>Ouvir estudantes e professoras das oficinas sobre o que muda na escola.</li>
+          <li>Verificar quais slams receberam recurso público em 2026 e quais seguem sem apoio.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Minidocumentário · YouTube · 3 min</p>
+        <h5>Slam vai à escola</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Acompanhar as três etapas da oficina em uma escola. Gravar a escrita, o ensaio e a disputa. Pedir autorização por escrito às famílias, porque há estudantes menores de idade.</dd>
+          <dt>Montagem</dt>
+          <dd>Abrir com o som da plateia e entrar na poesia de uma participante que autorizou o uso. Intercalar com falas curtas da professora. Fechar com o resultado da disputa e os créditos.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Cards · Instagram · 6 lâminas</p>
+        <h5>Linha do tempo do slam em SC</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Reunir datas verificáveis: 2017 com o Slam Continente, a chegada às escolas, os coletivos de mulheres e pessoas trans e a programação de 2026. Cada data com a fonte.</dd>
+          <dt>Montagem</dt>
+          <dd>Uma data por lâmina, ano em tipografia grande e uma frase curta. Convidar o público a marcar o slam da sua cidade, para ampliar a lista na próxima edição.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PAUTA 05 -->
+<section id="p5" class="band">
+  <div class="ph">
+    <span class="pn">05</span>
+    <h3>Ocupar a rua: fanfarra, bloco e escola</h3>
+    <p class="tag"><span>Fanfarra e escola</span><span>Florianópolis</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>O Honk!Floripa teve a primeira edição oficial entre 3 e 7 de junho de 2026, com fanfarras ativistas, oficinas e rodas de conversa em vários pontos da cidade<a class="ref" href="#s20">[20]</a>. O Bloco Ponte Que Pariu, criado em 2020, levou em 2026 concertos didáticos a escolas municipais<a class="ref" href="#s21">[21]</a>. A pauta olha para a rua como lugar de trabalho cultural e de formação de público.</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>Honk!Floripa: 3 a 7 de junho de 2026, formato derivado do movimento internacional HONK!<a class="ref" href="#s20">[20]</a>.</li>
+          <li>No Brasil, o festival chegou em 2015, com o Honk!Rio<a class="ref" href="#s20">[20]</a>.</li>
+          <li>A segunda fase do Ponte Que Pariu em 2026 inclui palestras, rodas de conversa e concertos didáticos<a class="ref" href="#s21">[21]</a>.</li>
+          <li>O projeto envolve artistas, músicos, técnicos e produtores<a class="ref" href="#s21">[21]</a>.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Quem paga uma fanfarra: origem do recurso, cachê dos músicos e custo de licença para ocupar espaço público.</li>
+          <li>Como as escolas escolhem e recebem esses projetos.</li>
+          <li>O que acontece com o bloco e a fanfarra fora do período de carnaval.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Vídeo vertical · Reels · 40 s</p>
+        <h5>Fanfarra na sala de aula</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Acompanhar um concerto didático e gravar o som ambiente, os instrumentos sendo apresentados e a reação da turma, com autorização da escola para imagens de estudantes.</dd>
+          <dt>Montagem</dt>
+          <dd>Planos curtos de instrumentos, plano aberto da turma, uma fala da professora e outra de um músico. O som real da apresentação conduz o corte do começo ao fim.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Carrossel · Instagram · 6 lâminas</p>
+        <h5>O que é Honk e por que está em Floripa</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Explicar origem, formato e programação com dados da organização do festival. Incluir quem organiza, onde as atividades aconteceram e como participar da próxima edição.</dd>
+          <dt>Montagem</dt>
+          <dd>Lâmina 1 com foto de fanfarra em rua. Lâminas 2 a 5 com um tema cada: origem, instrumentos, ocupação da rua e escola. Lâmina 6 com serviço e contato.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PAUTA 06 -->
+<section id="p6" class="band">
+  <div class="ph">
+    <span class="pn">06</span>
+    <h3>Quem expõe: artes visuais além do eixo litorâneo</h3>
+    <p class="tag"><span>Artes visuais</span><span>Blumenau · Florianópolis · Joinville</span></p>
+  </div>
+  <div class="panel pb">
+    <div class="col">
+      <div>
+        <h4>Resumo</h4>
+        <p>O Museu de Arte de Blumenau recebeu 48 inscrições para as temporadas de 2026, 18 delas de SC<a class="ref" href="#s22">[22]</a>. Foram selecionadas 24 propostas, 13 de SC, distribuídas em seis cidades<a class="ref" href="#s23">[23]</a>. Entre os eixos curatoriais está &ldquo;Social e Identidade&rdquo;<a class="ref" href="#s23">[23]</a>. A pauta pergunta quais cidades e linguagens ficam fora do circuito de museus.</p>
+      </div>
+      <div>
+        <h4>Dados localizados</h4>
+        <ul>
+          <li>48 inscritos, sendo 18 de SC, 15 de São Paulo e 10 do Paraná<a class="ref" href="#s22">[22]</a>.</li>
+          <li>13 projetos de SC selecionados: Blumenau (4), Florianópolis (4), Joinville (2), Gaspar (1), Balneário Camboriú (1) e Rio Negrinho (1)<a class="ref" href="#s23">[23]</a>.</li>
+          <li>Cinco temporadas em 2026, a última com abertura em 12 de novembro<a class="ref" href="#s23">[23]</a>.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ângulo de investigação</h4>
+        <ul>
+          <li>Obter a lista completa de inscritos e selecionados no site da Fundação Cultural de Blumenau e conferir a cidade de cada artista.</li>
+          <li>Comparar com outros museus e editais do estado para ver se o padrão se repete.</li>
+          <li>Ouvir artistas de cidades sem nenhuma seleção sobre onde conseguem expor.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <h4>Conteúdos para redes sociais</h4>
+      <article class="post">
+        <p class="fmt">Mapa ilustrado · Instagram · 1 imagem + legenda</p>
+        <h5>As seis cidades do museu</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Desenhar um mapa simples de SC e marcar as seis cidades com a quantidade de projetos selecionados. Escrever na legenda como o número foi obtido e onde está a lista completa.</dd>
+          <dt>Montagem</dt>
+          <dd>Mapa em duas cores, número grande em cada ponto e uma pergunta na legenda: &ldquo;e a sua cidade?&rdquo;. Fixar o post e responder aos comentários com dados da lista.</dd>
+        </dl>
+      </article>
+      <article class="post">
+        <p class="fmt">Retratos + áudio · Instagram · 3 posts</p>
+        <h5>Onde eu exponho</h5>
+        <dl>
+          <dt>Execução</dt>
+          <dd>Entrevistar três artistas de cidades fora da lista sobre onde mostram o trabalho, quanto custa e o que falta. Fotografar cada um diante do seu próprio trabalho.</dd>
+          <dt>Montagem</dt>
+          <dd>Retrato em preto e branco com uma frase destacada. Dentro do carrossel, trecho de áudio de 30 segundos da entrevista, com transcrição para acessibilidade.</dd>
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LIMITES -->
+<section id="limites" class="band">
+  <h2>Limites e como completar</h2>
+  <div class="panel">
+    <div class="cols2">
+      <div>
+        <h3>O que este levantamento não cobre</h3>
+        <ul>
+          <li>Avaliações de clientes no Google Maps. Elas não puderam ser consultadas, então nenhuma pauta usa esse tipo de dado.</li>
+          <li>Redes sociais, perfis fechados e arquivos que exigem login.</li>
+          <li>Casos de atraso no pagamento da PNAB apareceram na Bahia e no Rio Grande do Norte. Ficaram de fora porque o recorte é SC. Vale checar se acontece aqui.</li>
+          <li>Parte das fontes é divulgação de assessoria ou de organizadores. Cada número deve ser conferido em dado oficial antes de publicar.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Roteiro para completar à mão</h3>
+        <ol>
+          <li>No Google Maps, abrir o perfil de cada casa de show das pautas 02 e 05 e ler as avaliações públicas, filtrando por &ldquo;mais recentes&rdquo;.</li>
+          <li>Registrar só o que fala do estabelecimento: som, palco, pagamento a artistas, segurança. Anotar a data e guardar o link do perfil.</li>
+          <li>Não publicar nome, foto ou perfil de quem avaliou. Citar como &ldquo;avaliação pública&rdquo; e resumir com palavras próprias.</li>
+          <li>Para arquivos, procurar acervos de jornais locais e de fundações culturais municipais de cada cidade e anotar cada edição consultada.</li>
+          <li>Antes de postar, ligar ou escrever para quem é citado, e dar prazo para resposta.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="notice">
+      <p><strong>Para publicar:</strong> cada afirmação do texto traz o número da fonte entre colchetes. Abra a fonte, confira a data e o número, e procure o dado primário (edital, resultado, relatório) sempre que houver.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FONTES -->
+<section id="fontes" class="band">
+  <h2>Fontes para checagem</h2>
+  <div class="panel">
+    <ol class="src">
+      <li id="s1"><span class="k">[1]</span><div><a href="https://comitedeculturasc.org/editais/edital-circuito-catarinense-de-cultura-2026-pnab-2026" target="_blank" rel="noopener">Edital Circuito Catarinense de Cultura 2026 · Comitê de Cultura SC</a><span class="u">comitedeculturasc.org</span><span class="c"><b>Conferir</b> valor total, nº de propostas, modalidades, cronograma até 31/07/2027.</span></div></li>
+      <li id="s2"><span class="k">[2]</span><div><a href="https://www.cultura.sc.gov.br/editais-e-acoes/editais/26298-fcc-abre-inscricoes-para-edital-circuito-catarinense-de-cultura-3" target="_blank" rel="noopener">FCC abre inscrições para o Edital Circuito Catarinense de Cultura · Fundação Catarinense de Cultura</a><span class="u">cultura.sc.gov.br</span><span class="c"><b>Conferir</b> regionalização das vagas, cotas e acessibilidade obrigatória.</span></div></li>
+      <li id="s3"><span class="k">[3]</span><div><a href="https://ssl.fepese.org.br/2026/circuitocatarinensedecultura2026/?endpoint=81b35e60e1ad75afe4a4700822a5e3da&amp;f=resultado_da_etapa_de_avaliacao_2026.pdf" target="_blank" rel="noopener">Resultado da etapa de avaliação · Circuito Catarinense de Cultura 2026</a><span class="u">ssl.fepese.org.br</span><span class="c"><b>Conferir</b> município, classe e modalidade de cada proposta; presença de Slam SC, Slam Xodó e Força das Yabás.</span></div></li>
+      <li id="s4"><span class="k">[4]</span><div><a href="https://circuitocatarinensedecultura2026.fepese.org.br/" target="_blank" rel="noopener">Perguntas e respostas do edital · Circuito Catarinense de Cultura 2026</a><span class="u">circuitocatarinensedecultura2026.fepese.org.br</span><span class="c"><b>Conferir</b> critérios da modalidade Festivais e Mostras.</span></div></li>
+      <li id="s5"><span class="k">[5]</span><div><a href="https://artequemoraaqui.com.br/chamada-entre-artes-busca-artistas-e-fazedores-de-cultura-de-santa-catarina-para-publicacoes-e-entrevistas/" target="_blank" rel="noopener">Chamada Entre Artes · Arte que Mora Aqui</a><span class="u">artequemoraaqui.com.br</span><span class="c"><b>Conferir</b> municípios citados e origem dos recursos (PNAB). As inscrições já encerraram.</span></div></li>
+      <li id="s6"><span class="k">[6]</span><div><a href="https://hitsperdidos.com/2026/05/25/mapa-cena-independente-santa-catarina-bandas-artistas/" target="_blank" rel="noopener">Mapa reúne 115 bandas e artistas da cena independente de Santa Catarina · Hits Perdidos</a><span class="u">hitsperdidos.com</span><span class="c"><b>Conferir</b> 115 artistas, 13 casas e cidades concentradas.</span></div></li>
+      <li id="s7"><span class="k">[7]</span><div><a href="https://bazzan.substack.com/p/o-mapa-da-musica-autoral-de-santa" target="_blank" rel="noopener">O Mapa da Música Autoral de Santa Catarina · Bazzan</a><span class="u">bazzan.substack.com</span><span class="c"><b>Conferir</b> critério de até cinco anos de atividade e lista original.</span></div></li>
+      <li id="s8"><span class="k">[8]</span><div><a href="https://informefloripa.com/florianopolis-e-a-capital-brasileira-com-mais-bares-com-entretenimento-por-habitante/" target="_blank" rel="noopener">Florianópolis é a capital brasileira com mais bares com entretenimento por habitante · Informe Floripa</a><span class="u">informefloripa.com</span><span class="c"><b>Conferir</b> 77 por 100 mil no texto e 81,2 no ranking; buscar o estudo original da Abrasel.</span></div></li>
+      <li id="s9"><span class="k">[9]</span><div><a href="https://rifferama.com/ouca-todos-os-trabalhos-lancados-em-2026-em-santa-catarina/" target="_blank" rel="noopener">Ouça todos os trabalhos lançados em 2026 em Santa Catarina · Rifferama</a><span class="u">rifferama.com</span><span class="c"><b>Conferir</b> contagem de 115 álbuns e cidade de cada artista.</span></div></li>
+      <li id="s10"><span class="k">[10]</span><div><a href="https://jornaldobras.com.br/noticia/116128/com-sessoes-ao-vivo-e-entrevistas-escadinha-musical-impulsiona-artistas-independentes-de-santa-catarina" target="_blank" rel="noopener">Escadinha Musical impulsiona artistas independentes de Santa Catarina · Jornal do Brás</a><span class="u">jornaldobras.com.br</span><span class="c"><b>Conferir</b> apoio da Lei Paulo Gustavo e bandas citadas.</span></div></li>
+      <li id="s11"><span class="k">[11]</span><div><a href="https://housemag.com.br/9-coletivos-de-santa-catarina-que-vem-movimentando-a-cena-local-para-voce-ficar-de-olho/" target="_blank" rel="noopener">9 coletivos de Santa Catarina que vêm movimentando a cena local · House Mag</a><span class="u">housemag.com.br</span><span class="c"><b>Conferir</b> se os coletivos seguem ativos; a matéria tem cerca de dois anos.</span></div></li>
+      <li id="s12"><span class="k">[12]</span><div><a href="https://culturacatarina.com.br/mostra-cultural-xokleng-e-kaingang-fortalece-integracao-comunitaria-e-reafirma-luta-pela-terra-sagrada/" target="_blank" rel="noopener">Mostra Cultural Xokleng e Kaingang fortalece integração comunitária · Cultura Catarina</a><span class="u">culturacatarina.com.br</span><span class="c"><b>Conferir</b> datas, local da retomada e situação atual do território.</span></div></li>
+      <li id="s13"><span class="k">[13]</span><div><a href="https://www.camara.leg.br/assessoria-de-imprensa/1257393-exposicao-yvyrupa-territorio-apresenta-retratos-e-relatos-dos-povos-indigenas-em-santa-catarina/" target="_blank" rel="noopener">Exposição &ldquo;Yvyrupá Território&rdquo; · Câmara dos Deputados</a><span class="u">camara.leg.br</span><span class="c"><b>Conferir</b> período, local e curadoria.</span></div></li>
+      <li id="s14"><span class="k">[14]</span><div><a href="https://www.apufsc.org.br/2025/05/27/exposicao-com-raridades-e-curadoria-indigena-traz-territorios-guarani-kaingang-e-laklano-xokleng-para-a-ufsc/" target="_blank" rel="noopener">Exposição com curadoria indígena traz territórios Guarani, Kaingang e Laklãnõ-Xokleng para a UFSC · APUFSC</a><span class="u">apufsc.org.br</span><span class="c"><b>Conferir</b> número de curadores e descrição do manto Kul Tõ Vã Ze.</span></div></li>
+      <li id="s15"><span class="k">[15]</span><div><a href="https://www.correiosc.com.br/slam-continente-poesia-viva-na-praca/" target="_blank" rel="noopener">Slam Continente: a poesia está viva e batalhando na praça · Correio SC</a><span class="u">correiosc.com.br</span><span class="c"><b>Conferir</b> ano de início, local e quem trouxe a ideia.</span></div></li>
+      <li id="s16"><span class="k">[16]</span><div><a href="https://ciencia.ufpr.br/portal/slam-poetry-e-nova-forma-de-ativismo-cultural-aponta-estudo-da-ufpr/" target="_blank" rel="noopener">Slam poesia é nova forma de ativismo cultural · Ciência UFPR</a><span class="u">ciencia.ufpr.br</span><span class="c"><b>Conferir</b> etapas da oficina Slam Educa em Florianópolis.</span></div></li>
+      <li id="s17"><span class="k">[17]</span><div><a href="https://catarinas.info/elas-nos-inspiraram-em-2025/" target="_blank" rel="noopener">Elas nos inspiraram em 2025 · Catarinas</a><span class="u">catarinas.info</span><span class="c"><b>Conferir</b> descrição do Slam das Gurias e das demais iniciativas citadas.</span></div></li>
+      <li id="s18"><span class="k">[18]</span><div><a href="https://www.sesc-sc.com.br/cultura/viapoesia-2026-leva-literatura-oficinas-e-encontros-com-escritores-a-sete-cidades-catarinenses" target="_blank" rel="noopener">ViaPoesia 2026 · Sesc SC</a><span class="u">sesc-sc.com.br</span><span class="c"><b>Conferir</b> número de cidades: o título fala em sete e o texto lista oito.</span></div></li>
+      <li id="s19"><span class="k">[19]</span><div><a href="https://aconteceuemjoinville.com.br/festival-literario-de-sc-leva-poesia-educacao-antirracista-e-grandes-nomes-da-cultura-ao-centreventos-nesta-segunda/" target="_blank" rel="noopener">Festival Literário de SC leva poesia e educação antirracista ao Centreventos · Aconteceu em Joinville</a><span class="u">aconteceuemjoinville.com.br</span><span class="c"><b>Conferir</b> programação e participantes.</span></div></li>
+      <li id="s20"><span class="k">[20]</span><div><a href="https://informefloripa.com/honk-transforma-florianopolis-em-palco-coletivo-de-musica-arte-e-ocupacao-urbana/" target="_blank" rel="noopener">Honk! transforma Florianópolis em palco coletivo de música, arte e ocupação urbana · Informe Floripa</a><span class="u">informefloripa.com</span><span class="c"><b>Conferir</b> datas, programação e organização do festival.</span></div></li>
+      <li id="s21"><span class="k">[21]</span><div><a href="https://informefloripa.com/bloco-ponte-que-pariu-amplia-atuacao-em-2026-com-programacao-cultural-e-educativa-em-florianopolis/" target="_blank" rel="noopener">Bloco Ponte Que Pariu amplia atuação em 2026 · Informe Floripa</a><span class="u">informefloripa.com</span><span class="c"><b>Conferir</b> escolas atendidas e origem do recurso do projeto.</span></div></li>
+      <li id="s22"><span class="k">[22]</span><div><a href="https://www.blumenau.sc.gov.br/secretarias/fundacao-cultural/fcblu/artistas-de-sete-estados-se-inscrevem-para-exposiacaoes-do-mab63" target="_blank" rel="noopener">Artistas de sete estados se inscrevem para expor no MAB em 2026 · Prefeitura de Blumenau</a><span class="u">blumenau.sc.gov.br</span><span class="c"><b>Conferir</b> contagem de inscritos por estado e lista pública.</span></div></li>
+      <li id="s23"><span class="k">[23]</span><div><a href="https://www.blumenau.sc.gov.br/secretarias/fundacao-cultural/fcblu/mab-seleciona-24-projetos-para-as-temporadas-de-exposiacaoes-de-202614" target="_blank" rel="noopener">MAB seleciona 24 projetos para as temporadas de 2026 · Prefeitura de Blumenau</a><span class="u">blumenau.sc.gov.br</span><span class="c"><b>Conferir</b> distribuição por cidade e eixos curatoriais.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <p>Levantamento feito em 17.10.2026 com fontes públicas. Recorte: Santa Catarina. Dados e números devem ser conferidos nas fontes antes de publicar.</p>
+    <div class="barcode" role="presentation"></div>
+  </div>
+</footer>
+
+</body>
+</html>
